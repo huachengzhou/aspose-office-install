@@ -16,7 +16,6 @@ public class HelloWorld {
         //ExStart:HelloWorld
         // The path to the documents directory.
         String dataDir = Utils.getDataDir(HelloWorld.class);
-        dataDir = "E:\\doc\\word\\" ;
 
         String fileName = "HelloWorld.doc";
         // Load the template document.
