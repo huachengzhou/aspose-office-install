@@ -1,3 +1,5 @@
+package com.test;
+
 import com.aspose.words.*;
 import org.testng.annotations.Test;
 
@@ -19,7 +21,7 @@ public class Demo1 {
      */
     @Test
     public void testA() throws Exception {
-        com.aspose.words.Document document = new com.aspose.words.Document();
+        Document document = new Document();
         document.getMailMerge().execute(new String[]{"fullName"}, new Object[]{"james"});
         document.save(String.format("%s%s%s", dir, UUID.randomUUID().toString().substring(1, 7), ".docx"));
     }
@@ -27,17 +29,17 @@ public class Demo1 {
     @Test
     public void testB() throws Exception {
         //新建一个空白的文档
-        com.aspose.words.Document doc = new Document();
+        Document doc = new Document();
         /*这里面的`builder`相当于一个画笔，提前给他规定样式，然后他就能根据你的要求画出你想画的Word。这里的画笔使用的是就近原则，当上面没有定义了builder的时候，
         会使用默认的格式，当上面定义了某个格式的时候，使用最近的一个（即最后一个改变的样式）*/
-        com.aspose.words.DocumentBuilder builder = new com.aspose.words.DocumentBuilder(doc);
+        DocumentBuilder builder = new DocumentBuilder(doc);
         //设定Word页面的样式
         //A4纸
-        builder.getPageSetup().setPaperSize(com.aspose.words.PaperSize.A4);
+        builder.getPageSetup().setPaperSize(PaperSize.A4);
         //方向
-        builder.getPageSetup().setOrientation(com.aspose.words.Orientation.PORTRAIT);
+        builder.getPageSetup().setOrientation(Orientation.PORTRAIT);
         //垂直对准
-        builder.getPageSetup().setVerticalAlignment(com.aspose.words.PageVerticalAlignment.TOP);
+        builder.getPageSetup().setVerticalAlignment(PageVerticalAlignment.TOP);
         //页面左边距
         builder.getPageSetup().setLeftMargin(42);
         //页面右边距
@@ -80,9 +82,9 @@ public class Demo1 {
 
         //表格使用
         //开始添加表格
-        com.aspose.words.Table table = builder.startTable();
+        Table table = builder.startTable();
         //开始添加第一行，并设置表格行高
-        com.aspose.words.RowFormat rowf = builder.getRowFormat();
+        RowFormat rowf = builder.getRowFormat();
         rowf.setHeight(40);
         /*....这里rowf可以有很多的设置*/
         //设置单元格是否水平合并，None为不合并
