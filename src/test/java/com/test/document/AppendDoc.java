@@ -19,7 +19,7 @@ public class AppendDoc {
      */
     @Test
     public void test() throws Exception {
-        String dataDir = Utils.getDataDir(AppendDoc.class);
+        String dataDir = Utils.getDataDir(this.getClass());
         System.out.println(dataDir);
         Document doc1 = new Document(dataDir + "doc1.doc");
         Document doc2 = new Document(dataDir + "doc2.doc");
