@@ -2,7 +2,7 @@ package com.test;
 
 import com.aspose.words.Document;
 import com.help.Utils;
-import com.red.tool.XmlMailMergeDataTable;
+import com.red.tool.xml.XmlMailMergeDataTable;
 import org.testng.annotations.Test;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -10,6 +10,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 
 /**
+ * xml数据替换
  * @createDate 2019/1/10
  **/
 public class Demo2 {

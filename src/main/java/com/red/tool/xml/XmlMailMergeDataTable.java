@@ -1,4 +1,4 @@
-package com.red.tool;
+package com.red.tool.xml;
 
 import com.aspose.words.IMailMergeDataSource;
 import org.w3c.dom.Element;
