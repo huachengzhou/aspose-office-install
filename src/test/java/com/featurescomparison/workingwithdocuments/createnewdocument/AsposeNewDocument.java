@@ -1,4 +1,4 @@
-package com.featurescomparison.createnewdocument;
+package com.featurescomparison.workingwithdocuments.createnewdocument;
 
 import com.aspose.words.Document;
 import com.aspose.words.DocumentBuilder;

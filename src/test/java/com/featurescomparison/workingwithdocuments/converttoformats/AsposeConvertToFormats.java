@@ -1,4 +1,4 @@
-package com.featurescomparison.workingwithdocuments;
+package com.featurescomparison.workingwithdocuments.converttoformats;
 
 import com.aspose.words.Document;
 import com.aspose.words.SaveFormat;

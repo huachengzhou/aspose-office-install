@@ -1,0 +1,1 @@
+# 此文件包主要是比较apache poi 与 aspose 处理word的比较

@@ -31,4 +31,25 @@ public class TestFile {
         return builder.toString();
     }
 
+    public static String getTestDataParentDir(Class<?> c) {
+        File dir = new File(System.getProperty("user.dir"));
+        StringBuilder builder = new StringBuilder(128);
+        builder.append(dir.toString()).append(File.separator).append("src").append("\\test\\java\\");
+        int i = 0;
+        for (String s : c.getName().split("\\.")) {
+            i++;
+            if (i == c.getName().split("\\.").length){
+
+            }else {
+                builder.append(s).append("\\");
+            }
+        }
+        dir = new File(builder.toString());
+        if (!dir.isDirectory()) {
+            dir.mkdir();
+        }
+        System.out.println("files:"+builder.toString());
+        return builder.toString();
+    }
+
 }

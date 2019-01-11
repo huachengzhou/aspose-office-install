@@ -1,4 +1,4 @@
-package com.featurescomparison.workingwithdocuments;
+package com.featurescomparison.workingwithdocuments.converttoformats;
 
 import com.help.TestFile;
 import org.apache.poi.hwpf.HWPFDocumentCore;

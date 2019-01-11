@@ -1,4 +1,4 @@
-package com.featurescomparison.createnewdocument;
+package com.featurescomparison.workingwithdocuments.createnewdocument;
 
 import com.help.TestFile;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
