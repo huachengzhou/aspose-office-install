@@ -17,6 +17,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
+    <poi.version>3.9</poi.version>
   </properties>
 
   <dependencies>
@@ -262,6 +263,30 @@
       <scope>system</scope>
       <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/aspose-cells-8.5.2.jar</systemPath>
     </dependency>
+
+    <!-- poi start -->
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi</artifactId>
+      <version>${poi.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-ooxml</artifactId>
+      <version>${poi.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-scratchpad</artifactId>
+      <version>${poi.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-ooxml-schemas</artifactId>
+      <version>${poi.version}</version>
+    </dependency>
+    <!-- poi end -->
+
 
   </dependencies>
 
