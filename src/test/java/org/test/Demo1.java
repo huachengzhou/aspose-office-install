@@ -2,6 +2,7 @@ package org.test;
 
 import com.aspose.words.Document;
 import com.aspose.words.DocumentBuilder;
+import com.aspose.words.Underline;
 import com.help.TestFile;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
@@ -13,6 +14,7 @@ import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.testng.annotations.Test;
 
+import java.awt.*;
 import java.util.UUID;
 
 /**
@@ -48,9 +50,22 @@ public class Demo1 {
         org.jsoup.select.Elements post_list = document.select("#post_list .post_item .post_item_body > p");
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
+        //获取Font对象，关于文字的大小，颜色，字体等等基本都在这个里面
+        com.aspose.words.Font font = builder.getFont();
+        //字体大小
+        font.setSize(22);
+        //是否粗体
+        font.setBold(false);
+        //下划线样式，None为无下划线
+        font.setUnderline(Underline.DASH);
+        //字体颜色
+        font.setColor(Color.black);
+        //设置字体
+        font.setNameFarEast("宋体");
         for (org.jsoup.nodes.Element ele:post_list){
             builder.writeln(ele.text());
         }
+
         doc.save(String.format("%s%s%s",dataPath, UUID.randomUUID().toString().substring(1,9),".docx"));
     }
 
