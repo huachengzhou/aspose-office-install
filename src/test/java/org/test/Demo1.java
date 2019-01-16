@@ -1,8 +1,6 @@
 package org.test;
 
-import com.aspose.words.Document;
-import com.aspose.words.DocumentBuilder;
-import com.aspose.words.Underline;
+import com.aspose.words.*;
 import com.help.TestFile;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
@@ -14,7 +12,9 @@ import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.testng.annotations.Test;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.File;
 import java.util.UUID;
 
 /**
@@ -66,7 +66,49 @@ public class Demo1 {
             builder.writeln(ele.text());
         }
 
+        //插入条形码
+        int numPages = 4;
+        insertBarcodeIntoFooter(builder, doc.getFirstSection(), 1, HeaderFooterType.FOOTER_PRIMARY,dataPath);
+        int i = 1;
+        while (i < numPages)
+        {
+            Section cloneSection = (Section) doc.getFirstSection().deepClone(false);
+            cloneSection.getPageSetup().setSectionStart(SectionStart.NEW_PAGE);
+            doc.appendChild(cloneSection);
+            insertBarcodeIntoFooter(builder, cloneSection, i, HeaderFooterType.FOOTER_PRIMARY,dataPath);
+            i += 1;
+        }
+
         doc.save(String.format("%s%s%s",dataPath, UUID.randomUUID().toString().substring(1,9),".docx"));
+    }
+
+    private void insertBarcodeIntoFooter(DocumentBuilder builder, Section section,
+                                         int pageId, int footerType,String dataPath) throws Exception {
+        // Move to the footer type in the specific section.
+        builder.moveToSection(section.getDocument().indexOf(section));
+        builder.moveToHeaderFooter(footerType);
+
+        // Insert the barcode, then move to the next line and insert the ID
+        // along with the page number.
+        // Use pageId if you need to insert a different barcode on each page. 0
+        // = First page, 1 = Second page etc.
+        builder.insertImage(ImageIO.read(new File(dataPath + "barcode.png")));
+        builder.writeln();
+        builder.write("1234567890");
+        builder.insertField("PAGE");
+
+        // Create a right aligned tab at the right margin.
+        double tabPos = section.getPageSetup().getPageWidth()
+                - section.getPageSetup().getRightMargin() - section.getPageSetup().getLeftMargin();
+        builder.getCurrentParagraph().getParagraphFormat().getTabStops()
+                .add(new TabStop(tabPos, TabAlignment.RIGHT, TabLeader.NONE));
+
+        // Move to the right hand side of the page and insert the page and page
+        // total.
+        builder.write(ControlChar.TAB);
+        builder.insertField("PAGE");
+        builder.write(" of ");
+        builder.insertField("NUMPAGES");
     }
 
 }
