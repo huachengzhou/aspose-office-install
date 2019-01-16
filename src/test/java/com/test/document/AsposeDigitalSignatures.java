@@ -2,6 +2,7 @@ package com.test.document;
 
 import com.aspose.words.FileFormatInfo;
 import com.aspose.words.FileFormatUtil;
+import com.help.TestFile;
 import com.help.Utils;
 import org.testng.annotations.Test;
 
@@ -20,7 +21,7 @@ public class AsposeDigitalSignatures {
      */
     @Test
     public void test()throws Exception{
-        String dataPath = Utils.getDataDir(this.getClass());
+        String dataPath = TestFile.getTestDataParentDir(this.getClass());
         // The path to the document which is to be processed.
         String filePath = dataPath + "担保书.docx";
 

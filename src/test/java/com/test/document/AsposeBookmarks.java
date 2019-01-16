@@ -4,6 +4,7 @@ import com.aspose.words.Bookmark;
 import com.aspose.words.Document;
 import com.aspose.words.DocumentBuilder;
 import com.aspose.words.SaveFormat;
+import com.help.TestFile;
 import com.help.Utils;
 import org.testng.annotations.Test;
 
@@ -20,7 +21,7 @@ public class AsposeBookmarks {
      */
     @Test
     public void test()throws Exception{
-        String dataPath = Utils.getDataDir(this.getClass());
+        String dataPath = TestFile.getTestDataParentDir(this.getClass());
 
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);
