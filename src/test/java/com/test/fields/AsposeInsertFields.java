@@ -1,6 +1,7 @@
 package com.test.fields;
 
 import com.aspose.words.*;
+import com.help.TestFile;
 import com.help.Utils;
 import org.testng.annotations.Test;
 
@@ -17,7 +18,7 @@ public class AsposeInsertFields {
      */
     @Test
     public void test() throws Exception{
-        final String dataPath = Utils.getDataDir(this.getClass());
+        final String dataPath = TestFile.getTestDataParentDir(this.getClass());
 
         Document doc = new Document();
         DocumentBuilder builder = new DocumentBuilder(doc);

@@ -3,6 +3,7 @@ package com.test.fields;
 import com.aspose.words.Document;
 import com.aspose.words.DocumentBuilder;
 import com.aspose.words.Field;
+import com.help.TestFile;
 import com.help.Utils;
 import org.testng.annotations.Test;
 
@@ -19,7 +20,7 @@ public class AsposeRemoveFields {
      */
     @Test
     public void test() throws Exception{
-        final String dataPath = Utils.getDataDir(this.getClass());
+        final String dataPath = TestFile.getTestDataParentDir(this.getClass());
 
 
         Document doc = new Document();
