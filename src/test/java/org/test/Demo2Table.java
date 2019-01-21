@@ -3,15 +3,15 @@ package org.test;
 import com.aspose.words.*;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.help.TestFile;
 import com.red.tool.other.MergeCellModel;
+import org.apache.commons.collections.CollectionUtils;
 import org.testng.annotations.Test;
 
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 /**
  * @Author noatn
@@ -19,6 +19,203 @@ import java.util.UUID;
  * @createDate 2019/1/16
  **/
 public class Demo2Table {
+
+
+    @Test
+    public void testD() throws Exception {
+        List<String> stringList = new ArrayList<String>(12);
+        for (int i = 0; i < 12; i++) {
+            stringList.add(UUID.randomUUID().toString());
+        }
+        final String dataPath = TestFile.getTestDataParentDir(this.getClass());
+        Document doc = new Document();
+        DocumentBuilder builder = new DocumentBuilder(doc);
+        builder.writeln("估价土地实体状况表");
+        for (String s : stringList) {
+            Set<MergeCellModel> mergeCellModelList = Sets.newHashSet();
+            Table table = builder.startTable();
+            //行
+            for (int j = 0; j < 8; j++) {
+                switch (j) {
+                    case 0:
+                        for (int k = 0; k < 5; k++) {
+                            switch (k) {
+                                case 0:
+                                    builder.insertCell();
+                                    builder.writeln("估价对象名称");
+                                    break;
+                                case 1:
+                                    builder.insertCell();
+                                    builder.writeln(s);
+                                    break;
+                                case 4:
+                                    builder.insertCell();
+                                    builder.writeln("备注");
+                                    break;
+                                default:
+                                    builder.insertCell();
+                                    break;
+                            }
+                        }
+                        builder.endRow();
+                        break;
+                    case 1:
+                        for (int k = 0; k < 5; k++) {
+                            switch (k) {
+                                case 0:
+                                    builder.insertCell();
+                                    builder.writeln("用途及级别");
+                                    break;
+                                case 1:
+                                    builder.insertCell();
+                                    break;
+                                case 4:
+                                    builder.insertCell();
+                                    break;
+                                default:
+                                    builder.insertCell();
+                                    break;
+                            }
+                        }
+                        builder.endRow();
+                        break;
+                    case 2:
+                        for (int k = 0; k < 5; k++) {
+                            switch (k) {
+                                case 0:
+                                    builder.insertCell();
+                                    builder.writeln("东至,南至,西至,北至");
+                                    break;
+                                case 1:
+                                    builder.insertCell();
+                                    break;
+                                case 4:
+                                    builder.insertCell();
+                                    break;
+                                default:
+                                    builder.insertCell();
+                                    break;
+                            }
+                        }
+                        builder.endRow();
+                        break;
+                    case 3:
+                        for (int k = 0; k < 5; k++) {
+                            switch (k) {
+                                case 0:
+                                    builder.insertCell();
+                                    builder.writeln("面积");
+                                    break;
+                                case 1:
+                                    builder.insertCell();
+                                    break;
+                                case 4:
+                                    builder.insertCell();
+                                    break;
+                                default:
+                                    builder.insertCell();
+                                    break;
+                            }
+                        }
+                        builder.endRow();
+                        break;
+                    case 4:
+                        for (int k = 0; k < 5; k++) {
+                            switch (k) {
+                                case 0:
+                                    builder.insertCell();
+                                    builder.writeln("形状");
+                                    break;
+                                case 1:
+                                    builder.insertCell();
+                                    break;
+                                case 4:
+                                    builder.insertCell();
+                                    break;
+                                default:
+                                    builder.insertCell();
+                                    break;
+                            }
+                        }
+                        builder.endRow();
+                        break;
+                    case 5:
+                        for (int k = 0; k < 5; k++) {
+                            switch (k) {
+                                case 0:
+                                    builder.insertCell();
+                                    builder.writeln("地形、地势、工程地质");
+                                    break;
+                                case 1:
+                                    builder.insertCell();
+                                    break;
+                                case 4:
+                                    builder.insertCell();
+                                    break;
+                                default:
+                                    builder.insertCell();
+                                    break;
+                            }
+                        }
+                        builder.endRow();
+                        break;
+                    case 6:
+                        for (int k = 0; k < 5; k++) {
+                            switch (k) {
+                                case 0:
+                                    builder.insertCell();
+                                    builder.writeln("开发程度");
+                                    break;
+                                case 1:
+                                    builder.insertCell();
+                                    break;
+                                case 4:
+                                    builder.insertCell();
+                                    break;
+                                default:
+                                    builder.insertCell();
+                                    break;
+                            }
+                        }
+                        builder.endRow();
+                        break;
+                    case 7:
+                        for (int k = 0; k < 5; k++) {
+                            switch (k) {
+                                case 0:
+                                    builder.insertCell();
+                                    builder.writeln("其它");
+                                    break;
+                                case 1:
+                                    builder.insertCell();
+                                    break;
+                                case 4:
+                                    builder.insertCell();
+                                    break;
+                                default:
+                                    builder.insertCell();
+                                    break;
+                            }
+                        }
+                        builder.endRow();
+                        break;
+                    default:
+                        break;
+                }
+                mergeCellModelList.add(new MergeCellModel(j, 1, j, 3));
+            }
+            if (CollectionUtils.isNotEmpty(mergeCellModelList)) {
+                for (MergeCellModel mergeCellModel : mergeCellModelList) {
+                    Cell cellStartRange = table.getRows().get(mergeCellModel.getStartRowIndex()).getCells().get(mergeCellModel.getStartColumnIndex());
+                    Cell cellEndRange = table.getRows().get(mergeCellModel.getEndRowIndex()).getCells().get(mergeCellModel.getEndColumnIndex());
+                    mergeCells(cellStartRange, cellEndRange, table);
+                }
+            }
+            builder.endTable();
+        }
+        doc.save(String.format("%s%s%s%s", dataPath, this.getClass().getSimpleName(), "testD", ".docx"));
+    }
+
 
     @Test
     public void testF() throws Exception {
@@ -79,7 +276,7 @@ public class Demo2Table {
                     mergeCellModelList.add(new MergeCellModel(12, 1, 15, 1));
                     mergeCellModelList.add(new MergeCellModel(11, 1, 11, 2));
                 }
-                if (15 < j && j <= 18){
+                if (15 < j && j <= 18) {
                     for (int k = 0; k < 5; k++) {
                         if (k == 0 && j == 16) {
                             builder.insertCell();
