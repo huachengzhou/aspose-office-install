@@ -2,7 +2,6 @@ package org.test;
 
 import com.aspose.words.*;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.help.TestFile;
 import com.red.tool.other.MergeCellModel;
@@ -14,11 +13,174 @@ import java.util.*;
 import java.util.List;
 
 /**
- * @Author noatn
+ * @Author zch
  * @Description
  * @createDate 2019/1/16
  **/
 public class Demo2Table {
+
+    @Test
+    public void testB() throws Exception {
+        List<String> stringList = new ArrayList<String>(12);
+        for (int i = 0; i < 12; i++) {
+            stringList.add(UUID.randomUUID().toString());
+        }
+        final String dataPath = TestFile.getTestDataParentDir(this.getClass());
+        Document doc = new Document();
+        DocumentBuilder builder = new DocumentBuilder(doc);
+        builder.writeln("房屋所有权登记状况表");
+        for (String s : stringList) {
+            Set<MergeCellModel> mergeCellModelList = Sets.newHashSet();
+            Table table = builder.startTable();
+            for (int j = 0; j < 7; j++) {
+                switch (j) {
+                    case 0:
+                        for (int k = 0; k < 4; k++) {
+                            switch (k) {
+                                case 0:
+                                    builder.insertCell();
+                                    builder.writeln("权益状况");
+                                    break;
+                                case 1:
+                                    builder.insertCell();
+                                    builder.writeln("土地权益类型");
+                                    break;
+                                case 3:
+                                    builder.insertCell();
+                                    builder.writeln("");
+                                    break;
+                                default:
+                                    builder.insertCell();
+                                    break;
+                            }
+                        }
+                        builder.endRow();
+                        break;
+                    case 1:
+                        for (int k = 0; k < 4; k++) {
+                            switch (k) {
+                                case 1:
+                                    builder.insertCell();
+                                    builder.writeln("土地管制情况");
+                                    break;
+                                case 3:
+                                    builder.insertCell();
+                                    builder.writeln("");
+                                    break;
+                                default:
+                                    builder.insertCell();
+                                    break;
+                            }
+                        }
+                        builder.endRow();
+                        break;
+                    case 2:
+                        for (int k = 0; k < 4; k++) {
+                            switch (k) {
+                                case 1:
+                                    builder.insertCell();
+                                    builder.writeln("土地他项权力");
+                                    break;
+                                case 3:
+                                    builder.insertCell();
+                                    builder.writeln("");
+                                    break;
+                                default:
+                                    builder.insertCell();
+                                    break;
+                            }
+                        }
+                        builder.endRow();
+                        break;
+                    case 3:
+                        for (int k = 0; k < 4; k++) {
+                            switch (k) {
+                                case 1:
+                                    builder.insertCell();
+                                    builder.writeln("其他特殊情况");
+                                    break;
+                                case 3:
+                                    builder.insertCell();
+                                    builder.writeln("");
+                                    break;
+                                default:
+                                    builder.insertCell();
+                                    break;
+                            }
+                        }
+                        builder.endRow();
+                        break;
+                    case 4:
+                        for (int k = 0; k < 4; k++) {
+                            switch (k) {
+                                case 1:
+                                    builder.insertCell();
+                                    builder.writeln("房屋所有权");
+                                    break;
+                                case 3:
+                                    builder.insertCell();
+                                    builder.writeln("");
+                                    break;
+                                default:
+                                    builder.insertCell();
+                                    break;
+                            }
+                        }
+                        builder.endRow();
+                        break;
+                    case 5:
+                        for (int k = 0; k < 4; k++) {
+                            switch (k) {
+                                case 1:
+                                    builder.insertCell();
+                                    builder.writeln("出租或占用情况");
+                                    break;
+                                case 3:
+                                    builder.insertCell();
+                                    builder.writeln("");
+                                    break;
+                                default:
+                                    builder.insertCell();
+                                    break;
+                            }
+                        }
+                        builder.endRow();
+                        break;
+                    case 6:
+                        for (int k = 0; k < 4; k++) {
+                            switch (k) {
+                                case 1:
+                                    builder.insertCell();
+                                    builder.writeln("物业管理情况");
+                                    break;
+                                case 3:
+                                    builder.insertCell();
+                                    builder.writeln("");
+                                    break;
+                                default:
+                                    builder.insertCell();
+                                    break;
+                            }
+                        }
+                        builder.endRow();
+                        break;
+                    default:
+                        break;
+                }
+                mergeCellModelList.add(new MergeCellModel(j,1,j,2));
+                mergeCellModelList.add(new MergeCellModel(0,0,6,0));
+            }
+            if (CollectionUtils.isNotEmpty(mergeCellModelList)) {
+                for (MergeCellModel mergeCellModel : mergeCellModelList) {
+                    Cell cellStartRange = table.getRows().get(mergeCellModel.getStartRowIndex()).getCells().get(mergeCellModel.getStartColumnIndex());
+                    Cell cellEndRange = table.getRows().get(mergeCellModel.getEndRowIndex()).getCells().get(mergeCellModel.getEndColumnIndex());
+                    mergeCells(cellStartRange, cellEndRange, table);
+                }
+            }
+            builder.endTable();
+        }
+        doc.save(String.format("%s%s%s%s", dataPath, this.getClass().getSimpleName(), "testB", ".docx"));
+    }
 
 
     @Test
