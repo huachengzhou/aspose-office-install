@@ -2,7 +2,12 @@ package com.featurescomparison.workingwithimages;
 
 import com.aspose.words.*;
 import com.help.TestFile;
+import org.apache.tools.ant.taskdefs.Exec;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
+
+import java.io.File;
 
 /**
  * @Auther: zch
@@ -11,14 +16,23 @@ import org.testng.annotations.Test;
  */
 public class AsposeInsertImage {
 
+    private final Logger log = LoggerFactory.getLogger(getClass());
+
     @Test
     public void test() throws Exception {
-        final String dataPath = TestFile.getTestDataParentDir(this.getClass()) + "data\\";
-        Document doc = new Document();
+        final String dataPath = TestFile.getTestDataParentDir(this.getClass()) + "\\data\\document.doc";
+        System.out.println(dataPath);
+
+        Document doc = new Document(dataPath);
         DocumentBuilder builder = new DocumentBuilder(doc);
 
-        builder.insertImage(dataPath + "background.jpg");
-        builder.insertImage(dataPath + "background.jpg",
+        Bookmark bookmark = doc.getRange().getBookmarks().get("Check1");
+        System.out.println("bookmark:"+bookmark.getText());
+
+        String imgPath = TestFile.getTestDataParentDir(this.getClass())+"\\data\\" + "background.jpg" ;
+        System.out.println(imgPath);
+        builder.moveToBookmark("Check1");
+        builder.insertImage(imgPath,
                 RelativeHorizontalPosition.MARGIN,
                 100,
                 RelativeVerticalPosition.MARGIN,
@@ -27,9 +41,43 @@ public class AsposeInsertImage {
                 100,
                 WrapType.SQUARE);
 
-        doc.save(dataPath + "Aspose_InsertImage_Out.docx");
+        doc.save(TestFile.getTestDataParentDir(this.getClass())+"data\\" + "Aspose_InsertImage_Out.docx");
 
         System.out.println("Process Completed Successfully");
+    }
+
+    public String exportWmfFromDoc(String fileName) {
+       return null;
+    }
+
+    public void test2() throws Exception {
+        String templatePath = "";
+        Document doc = new Document(templatePath);
+        for (Bookmark mark : doc.getRange().getBookmarks()) {
+            if (mark != null) {
+                switch (mark.getName()) {
+                    case "NAME":
+                        mark.setText("龚辉");
+                        break;
+                    case "PHOTO":
+                        DocumentBuilder builder = new DocumentBuilder(doc);
+                        String imgPath = "";
+                        builder.moveToBookmark("PHOTO");
+                        builder.insertImage(imgPath + "background.jpg",
+                                RelativeHorizontalPosition.MARGIN,
+                                100,
+                                RelativeVerticalPosition.MARGIN,
+                                200,
+                                200,
+                                100,
+                                WrapType.SQUARE);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
     }
 
 }
