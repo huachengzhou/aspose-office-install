@@ -20,20 +20,20 @@ public class AsposeInsertImage {
 
     @Test
     public void test() throws Exception {
-        final String dataPath = TestFile.getTestDataParentDir(this.getClass()) + "\\data\\document.doc";
+        final String dataPath = TestFile.getTestDataParentDir(this.getClass()) + "\\data\\test.docx";
         System.out.println(dataPath);
 
         Document doc = new Document(dataPath);
         DocumentBuilder builder = new DocumentBuilder(doc);
 
-        Bookmark bookmark = doc.getRange().getBookmarks().get("Check1");
+        Bookmark bookmark = doc.getRange().getBookmarks().get("test");
         System.out.println("bookmark:"+bookmark.getText());
 
         String imgPath = TestFile.getTestDataParentDir(this.getClass())+"\\data\\" + "background.jpg" ;
         System.out.println(imgPath);
-        builder.moveToBookmark("Check1");
+        builder.moveToBookmark("test");
         builder.insertImage(imgPath,
-                RelativeHorizontalPosition.MARGIN,
+                RelativeHorizontalPosition.DEFAULT,
                 100,
                 RelativeVerticalPosition.MARGIN,
                 200,
