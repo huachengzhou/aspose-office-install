@@ -1,8 +1,11 @@
 package com.bookmarks;
 
 import com.aspose.words.*;
+import com.aspose.words.Shape;
 import com.help.TestFile;
 import org.testng.annotations.Test;
+
+import java.awt.*;
 
 /**
  * @Auther: zch
@@ -146,6 +149,71 @@ public class ShapeTest {
 
 
         builder.getDocument().save(dataDir + "Image.CreateFloatingPageCenterOut.doc");
+    }
+
+    /**
+     * 形状组  将形状组添加进来
+     * @throws Exception
+     */
+    @Test
+    public void test1()throws Exception{
+        String dataDir = TestFile.getTestDataParentDir(this.getClass());
+        Document doc = new Document();
+        doc.ensureMinimum();
+        GroupShape gs = new GroupShape(doc);
+
+        Shape shape = new Shape(doc, ShapeType.ACCENT_BORDER_CALLOUT_1);
+        shape.setWidth(100);
+        shape.setHeight(100);
+        gs.appendChild(shape);
+
+        Shape shape1 = new Shape(doc, ShapeType.ACTION_BUTTON_BEGINNING);
+        shape1.setLeft(100);
+        shape1.setWidth(100);
+        shape1.setHeight(200);
+        gs.appendChild(shape1);
+
+        gs.setWidth(200);
+        gs.setHeight(200);
+
+        gs.setCoordSize(new Dimension(200, 200));
+
+        DocumentBuilder builder = new DocumentBuilder(doc);
+        builder.insertNode(gs);
+
+        doc.save(dataDir + "AddGroupShape_out.docx");
+        //ExEnd:AddGroupShape
+    }
+
+    /**
+     * 插入浮动图片
+     * @throws Exception
+     */
+    @Test
+    public void insertFloatingImage()throws Exception{
+        String dataDir = TestFile.getTestDataParentDir(this.getClass());
+        // Open the document.
+        Document doc = new Document();
+        DocumentBuilder builder = new DocumentBuilder(doc);
+        builder.insertImage(dataDir + "Images\\dotnet-logo.png",
+                RelativeHorizontalPosition.MARGIN,
+                100,
+                RelativeVerticalPosition.MARGIN,
+                0,
+                200,
+                100,
+                WrapType.SQUARE);
+        builder.insertImage(dataDir + "Images\\dotnet-logo.png",
+                RelativeHorizontalPosition.MARGIN,
+                100,
+                RelativeVerticalPosition.MARGIN,
+                100,
+                200,
+                100,
+                WrapType.SQUARE);
+
+        doc.save(dataDir + "output.doc");
+        //ExEnd:DocumentBuilderInsertFloatingImage
     }
 
     @Test
