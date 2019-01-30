@@ -74,6 +74,36 @@ public class ShapeTest {
     }
 
     /**
+     * 插入多个
+     * @throws Exception
+     */
+    @Test
+    public void test6()throws Exception{
+        String dataDir = TestFile.getTestDataParentDir(this.getClass());
+        Document doc = new Document();
+        DocumentBuilder builder = new DocumentBuilder(doc);
+
+        Shape shape = new Shape(doc, ShapeType.IMAGE);
+        shape.getImageData().setImage(dataDir + "Images\\DRW8FB9.gif");
+        shape.setTop(0);
+        shape.setLeft(0);
+        shape.setWidth(40);
+        shape.setHeight(40);
+
+        Shape shape2 = new Shape(doc, ShapeType.IMAGE);
+        shape2.getImageData().setImage(dataDir + "Images\\cif00001.png");
+        shape2.setTop(100);
+        shape2.setLeft(50);
+        shape2.setWidth(40);
+        shape2.setHeight(40);
+
+        builder.insertNode(shape);
+        builder.insertNode(shape2);
+
+        doc.save(dataDir + "output.doc");
+    }
+
+    /**
      * 书签替换图形
      * @throws Exception
      */
@@ -113,6 +143,7 @@ public class ShapeTest {
         shape.setHorizontalAlignment(HorizontalAlignment.CENTER);
         shape.setRelativeVerticalPosition(RelativeVerticalPosition.PAGE);
         shape.setVerticalAlignment(VerticalAlignment.CENTER);
+
 
         builder.getDocument().save(dataDir + "Image.CreateFloatingPageCenterOut.doc");
     }
