@@ -9,12 +9,22 @@ import org.testng.annotations.Test;
  * @Date: 2019/1/30 15:16
  * @Description:
  */
-public class DocumentBuilderSetImageAspectRatioLocked {
+public class ShapeTest {
 
 
     @Test
     public void test3()throws Exception{
-
+        String dataDir = TestFile.getTestDataParentDir(this.getClass());
+        Document doc = new Document(dataDir + "MyBookmark.docx");
+        DocumentBuilder builder = new DocumentBuilder(doc);
+        Shape shape = builder.insertImage(dataDir + "Test.png");
+        shape.setWidth(40);
+        shape.setHeight(40);
+        shape.setWrapType(WrapType.NONE);
+        shape.setBehindText(true);//指定形状是在文本下方还是上方。仅对顶级形状有效。默认值为假。
+        builder.moveToBookmark("image");
+        builder.insertNode(shape);
+        doc.save(dataDir + "output.doc");
     }
 
     /**
