@@ -1,8 +1,6 @@
 package com.bookmarks;
 
-import com.aspose.words.Document;
-import com.aspose.words.DocumentBuilder;
-import com.aspose.words.Shape;
+import com.aspose.words.*;
 import com.help.TestFile;
 import org.testng.annotations.Test;
 
@@ -13,11 +11,41 @@ import org.testng.annotations.Test;
  */
 public class DocumentBuilderSetImageAspectRatioLocked {
 
+
     @Test
-    public void test()throws Exception{
+    public void test3()throws Exception{
+
+    }
+
+    /**
+     * 显示如何在页面中间插入浮动图像。
+     * @throws Exception
+     */
+    @Test
+    public void test2() throws Exception {
+        String dataDir = TestFile.getTestDataParentDir(this.getClass());
+        // This creates a builder and also an empty document inside the builder.
+        DocumentBuilder builder = new DocumentBuilder();
+
+        // By default, the image is inline.
+        Shape shape = builder.insertImage(dataDir + "Images\\Aspose.Words.gif");
+
+        // Make the image float, put it behind text and center on the page.
+        shape.setWrapType(WrapType.NONE);
+        shape.setBehindText(true);
+        shape.setRelativeHorizontalPosition(RelativeHorizontalPosition.PAGE);
+        shape.setHorizontalAlignment(HorizontalAlignment.CENTER);
+        shape.setRelativeVerticalPosition(RelativeVerticalPosition.PAGE);
+        shape.setVerticalAlignment(VerticalAlignment.CENTER);
+
+        builder.getDocument().save(dataDir + "Image.CreateFloatingPageCenterOut.doc");
+    }
+
+    @Test
+    public void test() throws Exception {
         //ExStart:DocumentBuilderSetImageAspectRatioLocked
         // The path to the documents directory.
-        String dataDir =  TestFile.getTestDataParentDir(this.getClass());
+        String dataDir = TestFile.getTestDataParentDir(this.getClass());
 
         // Open the document.
         Document doc = new Document();
