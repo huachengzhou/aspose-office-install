@@ -11,7 +11,72 @@ import org.testng.annotations.Test;
  */
 public class ShapeTest {
 
+    /**
+     * 获取所有的图像类型
+     * @throws Exception
+     */
+    @Test
+    public void getAllShape()throws Exception{
+        String dataDir = TestFile.getTestDataParentDir(this.getClass());
+        Document doc = new Document(dataDir+"Image.SampleImages.doc");
 
+        NodeCollection shapes = doc.getChildNodes(NodeType.SHAPE, true);
+        int imageIndex = 0;
+        for (Shape shape : (Iterable<Shape>) shapes)
+        {
+            if (shape.hasImage())
+            {
+                String imageFileName = java.text.MessageFormat.format(
+                        "Image.ExportImages.{0} Out{1}", imageIndex, FileFormatUtil.imageTypeToExtension(shape.getImageData().getImageType()));
+                shape.getImageData().save(dataDir + imageFileName);
+                imageIndex++;
+            }
+        }
+    }
+
+    /**
+     * 包含常量的实用程序类。指定Microsoft Word文档中的形状类型。如默认图片,三角形，圆形等
+     * @throws Exception
+     */
+    @Test
+    public void test4()throws Exception{
+        String dataDir = TestFile.getTestDataParentDir(this.getClass());
+        Document doc = new Document();
+
+        Shape shape = new Shape(doc, ShapeType.PLUS);
+        shape.getImageData().setImage(dataDir + "Test.png");
+        shape.setWidth(100);
+        shape.setHeight(100);
+
+        doc.getFirstSection().getBody().getFirstParagraph().appendChild(shape);
+
+        doc.save(dataDir + "output.doc");
+    }
+
+    @Test
+    public void test5()throws Exception{
+        String dataDir = TestFile.getTestDataParentDir(this.getClass());
+        // This creates a builder and also an empty document inside the builder.
+        DocumentBuilder builder = new DocumentBuilder();
+
+        // By default, the image is inline.
+        Shape shape = builder.insertImage(dataDir + "Images\\Aspose.Words.gif");
+
+        // Make the image float, put it behind text and center on the page.
+        shape.setWrapType(WrapType.NONE);
+        shape.setBehindText(true);
+        shape.setRelativeHorizontalPosition(RelativeHorizontalPosition.PAGE);
+        shape.setHorizontalAlignment(HorizontalAlignment.CENTER);
+        shape.setRelativeVerticalPosition(RelativeVerticalPosition.PAGE);
+        shape.setVerticalAlignment(VerticalAlignment.CENTER);
+
+        builder.getDocument().save(dataDir + "output.doc");
+    }
+
+    /**
+     * 书签替换图形
+     * @throws Exception
+     */
     @Test
     public void test3()throws Exception{
         String dataDir = TestFile.getTestDataParentDir(this.getClass());
@@ -20,9 +85,10 @@ public class ShapeTest {
         Shape shape = builder.insertImage(dataDir + "Test.png");
         shape.setWidth(40);
         shape.setHeight(40);
+
         shape.setWrapType(WrapType.NONE);
-        shape.setBehindText(true);//指定形状是在文本下方还是上方。仅对顶级形状有效。默认值为假。
-        builder.moveToBookmark("image");
+//        shape.setBehindText(true);//指定形状是在文本下方还是上方。仅对顶级形状有效。默认值为假。
+        builder.moveToBookmark("ntf010145060");
         builder.insertNode(shape);
         doc.save(dataDir + "output.doc");
     }
