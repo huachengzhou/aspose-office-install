@@ -77,7 +77,6 @@ public class Demo3Table {
                                 break;
                             case 6:
                                 builder.insertCell();
-                                mergeCellModelList.add(new MergeCellModel(j, 6, j, 7));
                                 break;
 
                             default:
