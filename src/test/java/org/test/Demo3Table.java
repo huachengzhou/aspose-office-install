@@ -21,6 +21,108 @@ import java.util.UUID;
 public class Demo3Table {
 
     @Test
+    public void testC() throws Exception {
+        final String dataPath = TestFile.getTestDataParentDir(this.getClass());
+        Document doc = new Document();
+        DocumentBuilder builder = new DocumentBuilder(doc);
+        Set<MergeCellModel> mergeCellModelList = Sets.newHashSet();
+        Table table = builder.startTable();
+        List<String> stringList = new ArrayList<String>(12);
+        for (int i = 0; i < 12; i++) {
+            stringList.add(UUID.randomUUID().toString().substring(0, 4));
+        }
+        int num = 2;
+        int length = 12;
+        for (int j = 0; j < num; j++) {
+            switch (j) {
+                case 0:
+                    for (int k = 0; k < length; k++) {
+                        if (k == 0) {
+                            builder.insertCell();
+                            mergeCellModelList.add(new MergeCellModel(0, 0, 0, 11));
+                            builder.writeln("估价对象《土地使用证》登记状况一览表");
+                        } else {
+                            builder.insertCell();
+                            builder.writeln("");
+                        }
+                    }
+                    builder.endRow();
+                    break;
+                case 1:
+                    for (int k = 0; k < length; k++) {
+                        switch (k) {
+                            case 0:
+                                builder.insertCell();
+                                builder.writeln("土地证号");
+                                break;
+                            case 1:
+                                builder.insertCell();
+                                builder.writeln("座落");
+                                break;
+                            case 2:
+                                builder.insertCell();
+                                builder.writeln("土地使用权人");
+                                break;
+                            case 3:
+                                builder.insertCell();
+                                builder.writeln("地号");
+                                break;
+                            case 4:
+                                builder.insertCell();
+                                builder.writeln("图号");
+                                break;
+                            case 5:
+                                builder.insertCell();
+                                builder.writeln("终止日期");
+                                break;
+                            case 6:
+                                builder.insertCell();
+                                builder.writeln("使用权类型");
+                                break;
+                            case 7:
+                                builder.insertCell();
+                                builder.writeln("用途");
+                                break;
+                            case 8:
+                                builder.insertCell();
+                                builder.writeln("使用权面积（㎡）");
+                                break;
+                            case 9:
+                                builder.insertCell();
+                                builder.writeln("其中：分摊面积（㎡）");
+                                break;
+                            case 10:
+                                builder.insertCell();
+                                builder.writeln("取得价格（万元）");
+                                break;
+                            case 11:
+                                builder.insertCell();
+                                builder.writeln("记   事");
+                                break;
+                            default:
+                                builder.insertCell();
+                                break;
+                        }
+                    }
+                    builder.endRow();
+                    break;
+                default:
+                    break;
+            }
+        }
+        if (CollectionUtils.isNotEmpty(mergeCellModelList)) {
+            for (MergeCellModel mergeCellModel : mergeCellModelList) {
+                Cell cellStartRange = table.getRows().get(mergeCellModel.getStartRowIndex()).getCells().get(mergeCellModel.getStartColumnIndex());
+                Cell cellEndRange = table.getRows().get(mergeCellModel.getEndRowIndex()).getCells().get(mergeCellModel.getEndColumnIndex());
+                mergeCells(cellStartRange, cellEndRange, table);
+            }
+        }
+        builder.endTable();
+        //当前类 和 当前运行方法
+        doc.save(String.format("%s%s%s%s", dataPath, this.getClass().getSimpleName(), Thread.currentThread().getStackTrace()[1].getMethodName(), ".docx"));
+    }
+
+    @Test
     public void testB() throws Exception {
         List<String> stringList = new ArrayList<String>(12);
         for (int i = 0; i < 12; i++) {
@@ -51,7 +153,7 @@ public class Demo3Table {
                                 builder.insertCell();
                                 builder.writeln("估价结果");
                                 //未处理
-                                mergeCellModelList.add(new MergeCellModel(j, 6, j+1, 7));
+                                mergeCellModelList.add(new MergeCellModel(j, 6, j + 1, 7));
                                 break;
                             default:
                                 builder.insertCell();
