@@ -21,6 +21,12 @@ import java.util.UUID;
 public class Demo3Table {
 
     @Test
+    public void testD()throws Exception{
+        String dataPath = TestFile.getTestDataDir(this.getClass());
+        System.out.println(dataPath);
+    }
+
+    @Test
     public void testC() throws Exception {
         final String dataPath = TestFile.getTestDataParentDir(this.getClass());
         Document doc = new Document();
