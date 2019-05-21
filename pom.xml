@@ -23,10 +23,20 @@
   <dependencies>
 
     <dependency>
+      <groupId>z-utils</groupId>
+      <artifactId>z-utils</artifactId>
+      <version>1.0</version>
+      <!--<scope>system</scope>-->
+      <!--<systemPath>${project.basedir}/lib/z-utils.jar</systemPath>-->
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.testng/testng -->
+    <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
-      <version>RELEASE</version>
+      <version>6.9.10</version>
     </dependency>
+
     <!-- 日志 -->
     <!-- slf4j-api -->
     <dependency>
