@@ -2,8 +2,8 @@ package com.test;
 
 import com.aspose.words.Document;
 import com.help.Utils;
-import com.red.tool.xml.XmlMailMergeDataTable;
 import org.testng.annotations.Test;
+import tool.utils.word.aspose.XmlMailMergeDataTable;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;

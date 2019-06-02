@@ -82,9 +82,9 @@ public class AsposeCheckFormatCompatibility {
                 case LoadFormat.OTT:
                     System.out.println("\tOpenDocument Text Template.");
                     break;
-                case LoadFormat.DOC_PRE_WORD_97:
-                    System.out.println("\tMS Word 6 or Word 95 format.");
-                    break;
+//                case LoadFormat.DOC_PRE_WORD_97: //低版本
+//                    System.out.println("\tMS Word 6 or Word 95 format.");
+//                    break;
                 case LoadFormat.UNKNOWN:
                 default:
                     System.out.println("\tUnknown format.");
